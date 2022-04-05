@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import './SearchPage.css';
 import { Link } from "react-router-dom";
 import Users from "./../../store/usersStore"
@@ -7,28 +7,46 @@ import Users from "./../../store/usersStore"
 const SearchPage = () => {
 
     const [text, onChangeText] = React.useState('');
-    const [searchResult, handleSearchReult] = React.useState([]);
+    const [searchResult, handleSearchReult] = React.useState(Users);
+
+    function handleChangeText(event){
+        onChangeText(event.target.value)
+    }
+
+    React.useEffect(()=>{
+        searchName()
+    },[text]);
+
 
     const searchName = () => {
-        const searchResult = Users.filter((user)=> user.name === text ? user.name : '')
+        const searchResult = Users.filter((user)=> user.name.toLowerCase().indexOf(text.toLowerCase()) !== -1)
         handleSearchReult(searchResult)
         console.log(searchResult); 
-        // return frmdetails
     }
-    
+
+   let resultToPrint = Users
+
+    if(searchResult.length === 0){
+        console.log('empty search')
+        resultToPrint = <div>Not found</div>
+        
+    } else {
+        resultToPrint = searchResult.map((user) => {
+            return(
+                <li key={user.id}>{`Пользователь ${user.name} с id: ${user.id}`}</li>
+            )
+        })
+    }
+
 
     return(
         <div>
             <Link to="./*">This is Search Page</Link>
 
-            <input type="text" name="name" onChange={e => onChangeText(e.target.value)} />
-            <button onClick={searchName}>Submit</button>
+            <input type="text" name="name" onChange={handleChangeText} />
+            {/* <button onClick={searchName}>Submit</button> */}
 
-            <div>
-                <h2>{searchResult === [] ? `Пользователей не найдено` : `${2}`}</h2>
-            </div>
-
-
+            {resultToPrint}
         </div>
 
     )
