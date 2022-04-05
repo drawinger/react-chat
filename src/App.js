@@ -1,25 +1,25 @@
-
+import React from 'react';
 import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import {AuthPage, HomePage, SearchPage} from './components/pages/index'
+
 
 function App() {
   return (
     <div>
       <header>
-          Zdarova
-          <h1>ZDAROVA</h1>
-          <h2>ZDAROVA2</h2>
-          <h2>ZDAROVA3</h2>
-          <p>cdlskclsekfleskn</p>
       </header>
       <div>
-        How is it going
+        <BrowserRouter>
+        <Routes>
+          <Route path='/*' element={<HomePage />} />
+          <Route path='/auth' element={<AuthPage />} />
+          <Route path='/search' element={<SearchPage />}/>
+        </Routes>
+
+        </BrowserRouter>
       </div>
-      <div>
-        NEW LINE!
-      </div>
-      <div>
-        NEWEST LINE!!!
-      </div>
+
     </div>
   );
 }
