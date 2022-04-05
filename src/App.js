@@ -14,6 +14,9 @@ function App() {
       <div>
         How is it going
       </div>
+      <div>
+        NEW LINE!
+      </div>
     </div>
   );
 }
