@@ -1,9 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const AuthPage = () => {
     return(
         <div>
-            This is Auth Page
+            <Link to="./*">This is Auth Page</Link>
         </div>
     )
 
