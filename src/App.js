@@ -12,7 +12,7 @@ function App() {
           <p>cdlskclsekfleskn</p>
       </header>
       <div>
-        Privet
+        How is it going
       </div>
     </div>
   );
